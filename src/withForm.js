@@ -1,12 +1,12 @@
 const R = require('ramda');
-import 'babel-polyfill';
-import React from 'react';
 
-import {
+const React = require('react');
+
+const {
   compose,
   withState,
   withHandlers
-} from 'recompose';
+} = require('recompose');
 
 export function withForm (WrappedComponent) {
   return class extends React.Component {
@@ -120,22 +120,27 @@ export function withForm (WrappedComponent) {
     }
 
     render () {
-      return <WrappedComponent 
-        {...this.props} 
-        form={{ 
-          isValid: this.isValid, 
-          manageField: this.manageField, 
-          hasError: this.hasError,
-          onError: this.onError,
-          setError: this.setError,
-          isFetching: this.isFetching,
-          setFetching: this.setFetching,
-          isDone: this.isDone,
-          reset: this.reset,
-          setDone: this.setDone,
-          values: this.values 
-        }} 
-      />;
+      return React.createElement(
+        WrappedComponent, 
+        R.merge(
+          this.props,
+          {
+            form: { 
+              isValid: this.isValid, 
+              manageField: this.manageField, 
+              hasError: this.hasError,
+              onError: this.onError,
+              setError: this.setError,
+              isFetching: this.isFetching,
+              setFetching: this.setFetching,
+              isDone: this.isDone,
+              reset: this.reset,
+              setDone: this.setDone,
+              values: this.values 
+            }
+          }
+        )
+      ) 
     }
   };
 }
