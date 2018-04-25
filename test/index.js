@@ -20,7 +20,8 @@ const enhance = compose(
   withHandlers({
     onSubmit: ({form, setValues}) => (e) => {
       e.preventDefault();
-      console.log(form.values())
+      console.log(form.values());
+      console.log(form.isValid());
       setValues(form.values());
     }
   })
@@ -35,9 +36,9 @@ const Test = enhance(
     <div style={{width: '300px'}}>
       <form onSubmit={onSubmit}>
         <h3>withForm</h3>
-        {form.manageField('email', {defaultValue: ''})(<input style={{width: '100%'}} placeholder="email"/>)}
+        {form.manageField('email', {defaultValue: '', isValid: v => v.length > 6})(<input style={{width: '100%'}} placeholder="email"/>)}
         <br/>
-        {form.manageField('password', {defaultValue: ''})(<input style={{width: '100%'}} type="password" placeholder="mot de passe"/>)}
+        {form.manageField('password', {defaultValue: '', isValid: v => v.length > 6})(<input style={{width: '100%'}} type="password" placeholder="mot de passe"/>)}
         <br/>
         <button type="submit">Ok</button>
       </form>

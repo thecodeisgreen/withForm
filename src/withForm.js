@@ -58,7 +58,7 @@ export function withForm (WrappedComponent) {
         return previousValue && this.fieldIsValid(field);
       }
 
-      return R.reduceWhile(isTrue, compute, true, R.values(this.state.fields));
+      return R.reduceWhile(isTrue, compute.bind(this), true, R.values(this.state.fields));
     }
 
     manageField (key, { defaultValue, isValid, styleOnNotValid, styleOnError }) {
