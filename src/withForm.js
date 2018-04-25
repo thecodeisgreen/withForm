@@ -2,11 +2,11 @@ const R = require('ramda');
 
 const React = require('react');
 
-const {
+import {
   compose,
   withState,
   withHandlers
-} = require('recompose');
+} from 'recompose';
 
 export function withForm (WrappedComponent) {
   return class extends React.Component {
