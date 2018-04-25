@@ -1,0 +1,40 @@
+{
+  "name": "@thecodeisgreen/withform",
+  "version": "0.0.1",
+  "description": "HOC ReactJS component for form management",
+  "main": "withForm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecodeisgreen/withForm.git"
+  },
+  "keywords": [
+    "form",
+    "reactjs",
+    "front"
+  ],
+  "author": "the code is green",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thecodeisgreen/withForm/issues"
+  },
+  "homepage": "https://github.com/thecodeisgreen/withForm#readme",
+  "dependencies": {
+    "babel-loader": "^7.1.4",
+    "ramda": "^0.25.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "recompose": "^0.27.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^3.2.0",
+    "path": "^0.12.7",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
+  }
+}
