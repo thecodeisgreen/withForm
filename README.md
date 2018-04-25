@@ -19,7 +19,7 @@ import {
   withState
 } from 'recompose';
 
-import withForm from '../index';
+import withForm from '@thecodeisgreen/withform';
 
 const enhance = compose(
   withForm,
