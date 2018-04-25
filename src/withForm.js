@@ -59,7 +59,11 @@ export function withForm (WrappedComponent) {
           return React.cloneElement(
           component,
             {
-              style: { ...component.props.style, ...(!this.fieldIsValid(field) ? styleOnNotValid : {}), ...(this.hasError() ? styleOnError : {}) },
+              style: R.merge(
+                component.props.style, 
+                !this.fieldIsValid(field) ? styleOnNotValid : {}, 
+                this.hasError() ? styleOnError : {}
+              ),
               value: field.value,
               onChange: e => this.setState({ error: null, fields: R.assocPath([key, 'value'], e.target.value, fields) })
             }
