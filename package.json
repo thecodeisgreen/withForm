@@ -2,7 +2,7 @@
   "name": "@thecodeisgreen/withform",
   "version": "0.0.1",
   "description": "HOC ReactJS component for form management",
-  "main": "src/withForm.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

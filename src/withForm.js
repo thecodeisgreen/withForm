@@ -1,5 +1,5 @@
 const R = require('ramda');
-
+import 'babel-polyfill';
 import React from 'react';
 
 import {
