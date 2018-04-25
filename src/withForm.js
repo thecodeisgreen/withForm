@@ -28,8 +28,6 @@ export function withForm (WrappedComponent) {
       this.setDone = this.setDone.bind(this);
 
       this.reset = this.reset.bind(this);
-
-      this.onChange = this.onChange.bind(this);
       
       this.fields = {};
       this.state = {
@@ -38,11 +36,6 @@ export function withForm (WrappedComponent) {
         error: null,
         done: false
       };
-    }
-
-    onChange(key, e) {
-      const { fields } = this.state;
-      this.setState({ error: null, fields: R.assocPath([key, 'value'], e.target.value, fields)});
     }
 
     fieldIsValid (field) {
@@ -63,6 +56,11 @@ export function withForm (WrappedComponent) {
 
     manageField (key, { defaultValue, isValid, styleOnNotValid, styleOnError }) {
       function component (component) {
+        
+        function onChange (e) {
+          this.setState({ error: null, fields: R.assocPath([key, 'value'], e.target.value, fields)});
+        }
+
         const { fields } = this.state;
         let field = R.propOr({ value: '', isValid: null }, key, fields);
         if (!R.has(key, fields)) {
@@ -78,7 +76,7 @@ export function withForm (WrappedComponent) {
                 this.hasError() ? styleOnError : {}
               ),
               value: field.value,
-              onChange: (e) => this.onChange(key, e)
+              onChange: onChange.bind(this)
             }
           );
         }
