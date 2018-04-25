@@ -8,7 +8,7 @@ import {
   withState
 } from 'recompose';
 
-import withForm from '../src/withForm';
+import withForm from '../index';
 
 const enhance = compose(
   withForm,
