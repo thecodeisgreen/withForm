@@ -58,7 +58,11 @@ export function withForm (WrappedComponent) {
       function component (component) {
         
         function onChange (e) {
-          this.setState({ error: null, fields: R.assocPath([key, 'value'], e.target.value, fields)});
+          if (!R.isNil(R.pathOr(undefined, ['target', 'value'], e))) {
+            this.setState({ error: null, fields: R.assocPath([key, 'value'], e.target.value, fields)});
+          } else {
+            this.setState({ error: null, fields: R.assocPath([key, 'value'], e, fields)});
+          }
         }
 
         const { fields } = this.state;
