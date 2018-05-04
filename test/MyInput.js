@@ -12,10 +12,10 @@ class MyInput extends React.Component {
   }
 
   render() {
-    const { value, style, placeholder } = this.props;
+    const { content, style, placeholder } = this.props;
     return(
       <div>
-        <input style={style} placeholder={placeholder} onChange={this.onUpdate} value={value}/>
+        <input style={style} placeholder={placeholder} onChange={this.onUpdate} value={content}/>
       </div>
     );
   }

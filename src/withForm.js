@@ -54,7 +54,7 @@ export function withForm (WrappedComponent) {
       return R.reduceWhile(isTrue, compute.bind(this), true, R.values(this.state.fields));
     }
 
-    manageField (key, { defaultValue, isValid, styleOnNotValid, styleOnError }) {
+    manageField (key, { defaultValue, isValid, styleOnNotValid, styleOnError, valueKey = 'value' }) {
       function component (component) {
         
         function onChange (e) {
@@ -79,7 +79,7 @@ export function withForm (WrappedComponent) {
                 !this.fieldIsValid(field) ? styleOnNotValid : {}, 
                 this.hasError() ? styleOnError : {}
               ),
-              value: field.value,
+              [valueKey]: field.value,
               onChange: onChange.bind(this)
             }
           );

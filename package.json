@@ -1,6 +1,6 @@
 {
   "name": "@thecodeisgreen/withform",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "HOC ReactJS component for form management",
   "main": "index.js",
   "scripts": {
