@@ -38,7 +38,21 @@ const Test = enhance(
     <div style={{width: '300px'}}>
       <form onSubmit={onSubmit}>
         <h3>withForm</h3>
-        {form.manageField('email', {defaultValue: '', isValid: v => v.length > 6})(<input style={{width: '100%'}} placeholder="email"/>)}
+        {
+          form.manageField(
+            'email', 
+            {
+              defaultValue: '', 
+              isValid: v => {
+                console.log('fsdkhfksdj')
+                return v.length > 6
+              },
+              isUpdated: e => {
+                console.log('onChange')
+              }
+            }
+          )(<input style={{width: '100%'}} placeholder="email"/>)
+        }
         <br/>
         {form.manageField('password', {defaultValue: '', isValid: v => v.length > 6})(<input style={{width: '100%'}} type="password" placeholder="mot de passe"/>)}
         <br/>

@@ -54,10 +54,11 @@ export function withForm (WrappedComponent) {
       return R.reduceWhile(isTrue, compute.bind(this), true, R.values(this.state.fields));
     }
 
-    manageField (key, { defaultValue, isValid, styleOnNotValid, styleOnError, valueKey = 'value' }) {
+    manageField (key, { defaultValue, isValid, isUpdated, styleOnNotValid, styleOnError, valueKey = 'value' }) {
       function component (component) {
         
         function onChange (e) {
+          if (R.is(Function, isUpdated)) isUpdated();
           if (!R.isNil(R.pathOr(undefined, ['target', 'value'], e))) {
             this.setState({ error: null, fields: R.assocPath([key, 'value'], e.target.value, fields)});
           } else {
@@ -68,7 +69,7 @@ export function withForm (WrappedComponent) {
         const { fields } = this.state;
         let field = R.propOr({ value: '', isValid: null }, key, fields);
         if (!R.has(key, fields)) {
-          this.fields = R.assoc(key, { value: defaultValue, isValid })(this.fields);
+          this.fields = R.assoc(key, { value: defaultValue, isValid, onChange })(this.fields);
           return null;
         } else {
           return React.cloneElement(
