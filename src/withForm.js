@@ -48,7 +48,7 @@ export default function withForm (WrappedComponent) {
       return R.reduceWhile(isTrue, compute.bind(this), true, R.values(this.state.fields));
     }
 
-    manageField (key, { defaultValue, isValid, isUpdated, styleOnNotValid, styleOnError, valueKey = 'value' }) {
+    manageField (key, { defaultValue, isValid, isUpdated, styleOnNotValid, styleOnError, show, cssDisplay = 'block', valueKey = 'value' }) {
       function component (component) {
         
         function onChange (e) {
@@ -71,8 +71,10 @@ export default function withForm (WrappedComponent) {
             {
               style: R.merge(
                 component.props.style, 
+                { display: R.is(Function, show) ? show() ? cssDisplay : 'none' : cssDisplay },
                 !this.fieldIsValid(field) ? styleOnNotValid : {}, 
-                this.hasError() ? styleOnError : {}
+                this.hasError() ? styleOnError : {},
+                
               ),
               [valueKey]: field.value,
               onChange: onChange.bind(this)
@@ -80,6 +82,7 @@ export default function withForm (WrappedComponent) {
           );
         }
       }
+      console.log('*** ', key);
 
       return component.bind(this);
     }

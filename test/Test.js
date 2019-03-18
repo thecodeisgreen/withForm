@@ -10,14 +10,25 @@ const useTest = (form) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(form.values());
-    console.log(form.isValid());
     setValues(form.values());
   };
 
   return {
     values,
     onSubmit
+  };
+};
+
+const useAddExtraField = () => {
+  const [showExtraField, setShowExtraField] = useState(false);
+
+  const onAddExtraField = () => {
+    setShowExtraField(true);
+  };
+
+  return {
+    showExtraField,
+    onAddExtraField
   };
 };
 
@@ -28,6 +39,11 @@ const Test = ({
     onSubmit,
     values
   } = useTest(form);
+
+  const {
+    showExtraField,
+    onAddExtraField
+  } = useAddExtraField();
 
   return (
     <div style={{ width: '300px' }}>
@@ -53,6 +69,18 @@ const Test = ({
         <br/>
         {form.manageField('about', { defaultValue: '', valueKey: 'content', isValid: v => v.length > 6 })(<MyInput style={{ width: '100%' }} placeholder="about you"/>)}
         <br/>
+        {form.manageField(
+          'extra', 
+          { 
+            defaultValue: '', 
+            valueKey: 'content', 
+            isValid: v => v.length > 6,
+            show: () => showExtraField,
+            cssDisplay: 'flex'
+          })(<MyInput style={{ width: '100%' }} placeholder="extra"/>
+        )
+        }
+        <button onClick={onAddExtraField}>Ajouter un champ</button>
         <button type="submit">Ok</button>
       </form>
       <div>
