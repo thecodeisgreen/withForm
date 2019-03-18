@@ -1,24 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+const MyInput = ({
+  onChange,
+  content, 
+  style,
+  placeholder
+}) => {
+  return (
+    <div>
+      <input 
+        style={style} 
+        placeholder={placeholder} 
+        onChange={(e) => onChange(e.target.value)} 
+        value={content}/>
+    </div>
+  );
+};
 
-class MyInput extends React.Component {
-  constructor() {
-    super();
-    this.onUpdate = this.onUpdate.bind(this);
-  }
-
-  onUpdate(e) {
-    this.props.onChange(e.target.value);
-  }
-
-  render() {
-    const { content, style, placeholder } = this.props;
-    return(
-      <div>
-        <input style={style} placeholder={placeholder} onChange={this.onUpdate} value={content}/>
-      </div>
-    );
-  }
-} 
+MyInput.propTypes = {
+  onChange: PropTypes.func,
+  content: PropTypes.string,
+  style: PropTypes.object,
+  placeholder: PropTypes.string  
+};
 
 export default MyInput;

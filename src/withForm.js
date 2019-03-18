@@ -2,13 +2,7 @@ const R = require('ramda');
 
 const React = require('react');
 
-import {
-  compose,
-  withState,
-  withHandlers
-} from 'recompose';
-
-export function withForm (WrappedComponent) {
+export default function withForm (WrappedComponent) {
   return class extends React.Component {
 
     constructor (props) {
@@ -43,11 +37,11 @@ export function withForm (WrappedComponent) {
     }
 
     isValid () {
-      function isTrue(v) { 
+      function isTrue (v) { 
         return v;
       }
 
-      function compute(previousValue, field) {
+      function compute (previousValue, field) {
         return previousValue && this.fieldIsValid(field);
       }
 
@@ -60,9 +54,9 @@ export function withForm (WrappedComponent) {
         function onChange (e) {
           if (R.is(Function, isUpdated)) isUpdated();
           if (!R.isNil(R.pathOr(undefined, ['target', 'value'], e))) {
-            this.setState({ error: null, fields: R.assocPath([key, 'value'], e.target.value, fields)});
+            this.setState({ error: null, fields: R.assocPath([key, 'value'], e.target.value, fields) });
           } else {
-            this.setState({ error: null, fields: R.assocPath([key, 'value'], e, fields)});
+            this.setState({ error: null, fields: R.assocPath([key, 'value'], e, fields) });
           }
         }
 
@@ -73,7 +67,7 @@ export function withForm (WrappedComponent) {
           return null;
         } else {
           return React.cloneElement(
-          component,
+            component,
             {
               style: R.merge(
                 component.props.style, 
@@ -85,7 +79,7 @@ export function withForm (WrappedComponent) {
             }
           );
         }
-      };
+      }
 
       return component.bind(this);
     }
@@ -158,9 +152,7 @@ export function withForm (WrappedComponent) {
             }
           }
         )
-      ) 
+      ); 
     }
   };
 }
-
-export default withForm;
