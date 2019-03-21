@@ -69,21 +69,18 @@ export default function withForm (WrappedComponent) {
           return React.cloneElement(
             component,
             {
-              style: R.merge(
+              style: R.mergeAll([
                 component.props.style, 
                 { display: R.is(Function, show) ? show() ? cssDisplay : 'none' : cssDisplay },
                 !this.fieldIsValid(field) ? styleOnNotValid : {}, 
-                this.hasError() ? styleOnError : {},
-                
-              ),
+                this.hasError() ? styleOnError : {}, 
+              ]),
               [valueKey]: field.value,
               onChange: onChange.bind(this)
             }
           );
         }
       }
-      console.log('*** ', key);
-
       return component.bind(this);
     }
 

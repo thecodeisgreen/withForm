@@ -55,17 +55,24 @@ const Test = ({
             {
               defaultValue: '', 
               isValid: v => {
-                console.log('fsdkhfksdj');
                 return v.length > 6;
               },
               isUpdated: e => {
-                console.log('onChange');
               }
             }
           )(<input style={{ width: '100%' }} placeholder="email"/>)
         }
         <br/>
-        {form.manageField('password', { defaultValue: '', isValid: v => v.length > 6 })(<input style={{ width: '100%' }} type="password" placeholder="mot de passe"/>)}
+        {
+          form.manageField('password', { 
+            defaultValue: '', 
+            isValid: v => {
+              console.log('is valid', v.length > 6);
+              return v.length > 6;
+            },
+            styleOnNotValid: { borderColor: 'orange' },
+          })(<input style={{ width: '100%' }} type="password" placeholder="mot de passe"/>)
+        }
         <br/>
         {form.manageField('about', { defaultValue: '', valueKey: 'content', isValid: v => v.length > 6 })(<MyInput style={{ width: '100%' }} placeholder="about you"/>)}
         <br/>
@@ -76,6 +83,7 @@ const Test = ({
             valueKey: 'content', 
             isValid: v => v.length > 6,
             show: () => showExtraField,
+            styleOnNotValid: { borderColor: 'orange' },
             cssDisplay: 'flex'
           })(<MyInput style={{ width: '100%' }} placeholder="extra"/>
         )
